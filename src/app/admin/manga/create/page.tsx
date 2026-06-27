@@ -12,6 +12,8 @@ export default function Page() {
   const [genres, setGenres] = useState("");
   const [language, setLanguage] = useState("am");
   const [isMature, setIsMature] = useState(false);
+  const [cover, setCover] = useState<File | null>(null);
+  const [pdf, setPdf] = useState<File | null>(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -33,6 +35,22 @@ export default function Page() {
         body: JSON.stringify(body),
         headers: { "Content-Type": "application/json" },
       });
+      if (cover) {
+        const coverForm = new FormData();
+        coverForm.append("cover", cover);
+        await apiRequest(`/manga/update-manga-cover/${result.id}`, {
+          method: "POST",
+          body: coverForm,
+        });
+      }
+      if (pdf) {
+        const pdfForm = new FormData();
+        pdfForm.append("pdf", pdf);
+        await apiRequest(`/manga/update-manga-pdf/${result.id}`, {
+          method: "POST",
+          body: pdfForm,
+        });
+      }
       router.push(`/admin/manga`);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to create manga.");
@@ -65,6 +83,30 @@ export default function Page() {
           <label className="text-[11px] font-black uppercase tracking-[0.12em] text-muted-foreground">Genres (comma-separated)</label>
           <input value={genres} onChange={(e) => setGenres(e.target.value)} placeholder="Action, Drama, Fantasy"
             className="mt-1 block w-full rounded-lg border border-input bg-background px-3 py-2.5 text-sm text-primary outline-none focus:border-ring focus:ring-1 focus:ring-ring" />
+        </div>
+        <div>
+          <label className="text-[11px] font-black uppercase tracking-[0.12em] text-muted-foreground">Cover Image</label>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => setCover(e.target.files?.[0] || null)}
+            className="mt-1 block w-full rounded-lg border border-input bg-background px-3 py-2.5 text-sm text-primary outline-none file:mr-4 file:rounded-md file:border-0 file:bg-primary file:px-3 file:py-1.5 file:text-[11px] file:font-bold file:uppercase file:tracking-[0.08em] file:text-primary-foreground focus:border-ring focus:ring-1 focus:ring-ring"
+          />
+          {cover ? (
+            <p className="mt-2 text-xs text-muted-foreground">
+              Selected: {cover.name}
+            </p>
+          ) : null}
+        </div>
+        <div>
+          <label className="text-[11px] font-black uppercase tracking-[0.12em] text-muted-foreground">Manga PDF</label>
+          <input
+            type="file"
+            accept="application/pdf"
+            onChange={(e) => setPdf(e.target.files?.[0] || null)}
+            className="mt-1 block w-full rounded-lg border border-input bg-background px-3 py-2.5 text-sm text-primary outline-none file:mr-4 file:rounded-md file:border-0 file:bg-primary file:px-3 file:py-1.5 file:text-[11px] file:font-bold file:uppercase file:tracking-[0.08em] file:text-primary-foreground focus:border-ring focus:ring-1 focus:ring-ring"
+          />
+          {pdf ? <p className="mt-2 text-xs text-muted-foreground">Selected: {pdf.name}</p> : null}
         </div>
         <div className="flex gap-4">
           <div className="flex-1">

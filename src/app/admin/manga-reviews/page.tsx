@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { apiRequest } from "@/admin/lib/api";
 import { DataTable } from "@/admin/components/ui/data-table";
-import { EmptyState } from "@/admin/components/ui/empty-state";
+import { EmptyState, TableEmptyState } from "@/admin/components/ui/empty-state";
 import { StatusBadge } from "@/admin/components/ui/status-badge";
 
 interface MangaItem {
@@ -53,7 +53,11 @@ export default function Page() {
             {isLoading ? (
               <tr><td colSpan={4} className="px-6 py-8 text-center text-sm text-muted-foreground">Loading...</td></tr>
             ) : mangas.length === 0 ? (
-              <tr><td colSpan={4} className="px-6 py-8 text-center text-sm text-muted-foreground">No pending manga.</td></tr>
+              <TableEmptyState
+                colSpan={4}
+                title="No manga waiting for review"
+                description="New creator submissions will appear here when they are ready to approve or reject."
+              />
             ) : (
               mangas.map((manga) => (
                 <tr key={manga.id} className="admin-table-row">

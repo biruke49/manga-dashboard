@@ -29,6 +29,7 @@ function initialFormState() {
     email: "",
     phone: "",
     phoneCountryIso: getPreferredCountryIso(),
+    password: "",
     gender: "male" as "male" | "female",
     roleIds: [] as string[],
   };
@@ -202,6 +203,7 @@ export default function Page() {
       email: user.email,
       phone: getNationalPhoneNumber(user.phone, inferCountryIsoFromPhoneNumber(user.phone) || getPreferredCountryIso()),
       phoneCountryIso: inferCountryIsoFromPhoneNumber(user.phone) || getPreferredCountryIso(),
+      password: "",
       gender: user.gender,
       roleIds: user.roleIds,
     });
@@ -262,6 +264,11 @@ export default function Page() {
 
     if (!isValidPhoneNumber(trimmedPhone, formState.phoneCountryIso)) {
       setFormError("Enter a valid phone number for the selected country.");
+      return;
+    }
+
+    if (modalState?.type === "register" && formState.password.length < 6) {
+      setFormError("Password must be at least 6 characters.");
       return;
     }
 
@@ -620,6 +627,20 @@ export default function Page() {
                 placeholder="0913922700"
               />
             </Field>
+            {modalState?.type === "register" ? (
+              <Field label="Password">
+                <input
+                  type="password"
+                  value={formState.password}
+                  onChange={(event) => {
+                    setFormError(null);
+                    setFormState((current) => ({ ...current, password: event.target.value }));
+                  }}
+                  className="h-11 w-full bg-[var(--surface-low)] px-3 text-sm text-primary outline-none"
+                  placeholder="At least 6 characters"
+                />
+              </Field>
+            ) : null}
             <Field label="Gender">
               <select value={formState.gender} onChange={(event) => setFormState((current) => ({ ...current, gender: event.target.value as "male" | "female" }))} className="h-11 w-full bg-[var(--surface-low)] px-3 text-sm text-primary outline-none">
                 <option value="male">Male</option>
@@ -918,6 +939,7 @@ export default function Page() {
       name: formState.name.trim(),
       email: formState.email.trim(),
       phoneNumber: normalizePhoneNumber(formState.phone.trim(), formState.phoneCountryIso),
+      password: formState.password,
       gender: formState.gender,
       address: {},
       emergencyContact: {},

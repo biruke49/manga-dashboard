@@ -317,10 +317,10 @@ export default function Page() {
         <div className="mt-5 grid gap-4">
           {formError ? <div className="border border-error/30 bg-error/5 px-4 py-3 text-sm text-error">{formError}</div> : null}
           <Field label="Role Name">
-            <input value={roleForm.name} onChange={(event) => setRoleForm((current) => ({ ...current, name: event.target.value }))} className="fleet-input" />
+            <input value={roleForm.name} onChange={(event) => setRoleForm((current) => ({ ...current, name: event.target.value }))} className="admin-input" />
           </Field>
           <Field label="Role Key">
-            <input value={roleForm.key} onChange={(event) => setRoleForm((current) => ({ ...current, key: normalizeRoleKey(event.target.value) }))} className="fleet-input" />
+            <input value={roleForm.key} onChange={(event) => setRoleForm((current) => ({ ...current, key: normalizeRoleKey(event.target.value) }))} className="admin-input" />
           </Field>
           <label className="flex items-center justify-between gap-4 border border-[color:color-mix(in_srgb,var(--border)_18%,transparent)] bg-[var(--surface-low)] px-3 py-3">
             <span className="text-[10px] font-black uppercase tracking-[0.16em] text-primary">Protected Role</span>
@@ -401,7 +401,7 @@ export default function Page() {
           </p>
           <div className="mt-4">
             <Field label="Reason">
-              <input value={roleForm.archiveReason} onChange={(event) => setRoleForm((current) => ({ ...current, archiveReason: event.target.value }))} className="fleet-input" placeholder="No longer used" />
+              <input value={roleForm.archiveReason} onChange={(event) => setRoleForm((current) => ({ ...current, archiveReason: event.target.value }))} className="admin-input" placeholder="No longer used" />
             </Field>
           </div>
         </div>

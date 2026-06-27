@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { apiRequest } from "@/admin/lib/api";
+import { EmptyState } from "@/admin/components/ui/empty-state";
 
 interface PageItem {
   id: string;
@@ -52,19 +53,6 @@ export default function Page({
     }
   };
 
-  const handleReorder = async (pageId: string, newNumber: number) => {
-    try {
-      await apiRequest("/chapter-pages/reorder-pages", {
-        method: "PUT",
-        body: JSON.stringify({ pageId, pageNumber: newNumber }),
-        headers: { "Content-Type": "application/json" },
-      });
-      await loadPages();
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Reorder failed.");
-    }
-  };
-
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between gap-4">
@@ -79,7 +67,16 @@ export default function Page({
 
       <section className="border border-[color:color-mix(in_srgb,var(--border)_20%,transparent)] bg-white p-6">
         {pages.length === 0 ? (
-          <p className="text-sm text-muted-foreground">No pages uploaded yet.</p>
+          <EmptyState
+            title="No pages uploaded yet"
+            description="Upload image files for this chapter. They will appear here in reading order once the backend returns them."
+            action={
+              <label className="cursor-pointer rounded-lg bg-primary px-4 py-2 text-[11px] font-black uppercase tracking-[0.12em] text-primary-foreground transition hover:bg-primary/88">
+                {uploading ? "Uploading..." : "Upload Pages"}
+                <input type="file" multiple accept="image/*" onChange={handleUpload} className="hidden" disabled={uploading} />
+              </label>
+            }
+          />
         ) : (
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
             {pages

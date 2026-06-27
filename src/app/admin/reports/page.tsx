@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { apiRequest } from "@/admin/lib/api";
 import { DataTable } from "@/admin/components/ui/data-table";
-import { EmptyState } from "@/admin/components/ui/empty-state";
+import { EmptyState, TableEmptyState } from "@/admin/components/ui/empty-state";
 import { StatusBadge } from "@/admin/components/ui/status-badge";
 
 interface ReportItem {
@@ -58,7 +58,11 @@ export default function Page() {
             {isLoading ? (
               <tr><td colSpan={4} className="px-6 py-8 text-center text-sm text-muted-foreground">Loading...</td></tr>
             ) : reports.length === 0 ? (
-              <tr><td colSpan={4} className="px-6 py-8 text-center text-sm text-muted-foreground">No reports.</td></tr>
+              <TableEmptyState
+                colSpan={4}
+                title="No reports"
+                description="Reader reports and moderation issues will show up here when they need attention."
+              />
             ) : (
               reports.map((report) => (
                 <tr key={report.id} className="admin-table-row">

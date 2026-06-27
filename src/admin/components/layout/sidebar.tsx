@@ -31,10 +31,10 @@ export function Sidebar({ open, onNavigate }: SidebarProps) {
       <div className="shrink-0 px-8 pb-4">
         <div className="flex items-center gap-3">
           <span className="flex h-9 w-9 items-center justify-center rounded-sm bg-primary text-sm font-semibold text-white">
-            V
+            Y
           </span>
           <span className="text-xl font-semibold tracking-[0.04em] text-primary">
-            VANTAGE
+            YISHAK
           </span>
         </div>
       </div>

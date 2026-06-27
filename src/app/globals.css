@@ -162,7 +162,7 @@ button {
   text-transform: uppercase;
 }
 
-.fleet-input {
+.admin-input {
   height: 2.75rem;
   width: 100%;
   border: 1px solid color-mix(in srgb, var(--border) 28%, transparent);
@@ -174,7 +174,7 @@ button {
   transition: border-color 160ms ease, box-shadow 160ms ease;
 }
 
-.fleet-input:focus {
+.admin-input:focus {
   border-color: var(--secondary);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--secondary) 12%, transparent);
 }

@@ -54,7 +54,19 @@ export interface CurrentUserResponse {
  }
 
 function getApiBaseUrl() {
-  return process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000/api";
+  const configuredUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+  if (typeof window !== "undefined" && configuredUrl) {
+    try {
+      const url = new URL(configuredUrl);
+      if (url.port === "6000") {
+        return "/api/backend";
+      }
+    } catch {
+      return configuredUrl;
+    }
+  }
+
+  return configuredUrl || "/api/backend";
 }
 
 interface RefreshResponse {

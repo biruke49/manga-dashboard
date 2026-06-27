@@ -4,7 +4,7 @@ const ACCESS_TOKEN_COOKIE = "access_token";
 const REFRESH_TOKEN_COOKIE = "refresh_token";
 
 function getApiBaseUrl() {
-  return process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000/api";
+  return process.env.API_INTERNAL_BASE_URL || "http://localhost:6000/api";
 }
 
 function clearAuthCookies(response: NextResponse) {

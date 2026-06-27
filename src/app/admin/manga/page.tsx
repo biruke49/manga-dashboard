@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { apiRequest } from "@/admin/lib/api";
 import { DataTable } from "@/admin/components/ui/data-table";
-import { EmptyState } from "@/admin/components/ui/empty-state";
+import { EmptyState, TableEmptyState } from "@/admin/components/ui/empty-state";
 import { StatusBadge } from "@/admin/components/ui/status-badge";
 
 interface MangaItem {
@@ -51,7 +51,19 @@ export default function Page() {
             {isLoading ? (
               <tr><td colSpan={5} className="px-6 py-8 text-center text-sm text-muted-foreground">Loading...</td></tr>
             ) : mangas.length === 0 ? (
-              <tr><td colSpan={5} className="px-6 py-8 text-center text-sm text-muted-foreground">No manga yet.</td></tr>
+              <TableEmptyState
+                colSpan={5}
+                title="No manga yet"
+                description="Create your first manga to start adding chapters, pages, and publishing status."
+                action={
+                  <Link
+                    href="/admin/manga/create"
+                    className="rounded-lg bg-primary px-4 py-2 text-[11px] font-black uppercase tracking-[0.12em] text-primary-foreground transition hover:bg-primary/88"
+                  >
+                    Create Manga
+                  </Link>
+                }
+              />
             ) : (
               mangas.map((manga) => (
                 <tr key={manga.id} className="admin-table-row">
@@ -60,8 +72,8 @@ export default function Page() {
                   <td className="px-6 py-4 text-[13px] text-muted-foreground">{manga.chapterCount}</td>
                   <td className="px-6 py-4 text-[13px] text-muted-foreground">{new Date(manga.createdAt).toLocaleDateString()}</td>
                   <td className="px-6 py-4 text-center">
-                    <Link href={`/admin/manga/${manga.id}/chapters`} className="text-[11px] font-black uppercase tracking-[0.12em] text-secondary hover:underline">
-                      Chapters
+                    <Link href={`/admin/manga/${manga.id}`} className="text-[11px] font-black uppercase tracking-[0.12em] text-secondary hover:underline">
+                      Edit
                     </Link>
                   </td>
                 </tr>

@@ -85,19 +85,6 @@ export function AreasIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-export function FleetIcon(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg {...baseIcon(props)}>
-      <path d="M5 17h14" />
-      <path d="M6 17l1.3-6.5A3 3 0 0 1 10.2 8h3.6a3 3 0 0 1 2.9 2.5L18 17" />
-      <path d="M8 13h8" />
-      <circle cx="8" cy="17" r="2" />
-      <circle cx="16" cy="17" r="2" />
-      <path d="M10 8V5h4v3" />
-    </svg>
-  );
-}
-
 export function BusinessIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg {...baseIcon(props)}>

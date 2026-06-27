@@ -1,8 +1,6 @@
 import {
   ActivityIcon,
   DashboardIcon,
-  FleetIcon,
-  RequestIcon,
   SettingsIcon,
   ShieldIcon,
   UsersIcon,
@@ -21,24 +19,6 @@ export interface AdminNavigationItem {
 
 export const adminNavigation = [
   { label: "Dashboard", href: "/admin", icon: DashboardIcon },
-  {
-    label: "Fleet Operations",
-    href: "/admin/fleet",
-    icon: FleetIcon,
-    requiredPermissions: ["manage-fleet", "view-fleet"],
-  },
-  {
-    label: "Bookings",
-    href: "/admin/bookings",
-    icon: RequestIcon,
-    requiredPermissions: ["manage-fleet", "view-fleet"],
-  },
-  {
-    label: "Drivers",
-    href: "/admin/drivers",
-    icon: UsersIcon,
-    requiredPermissions: ["manage-fleet", "view-fleet"],
-  },
   {
     label: "Users",
     href: "/admin/users",

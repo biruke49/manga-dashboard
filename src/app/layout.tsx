@@ -3,10 +3,10 @@ import "@/app/globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "VANTAGE Admin",
-    template: "%s | VANTAGE Admin",
+    default: "YISHAK Admin",
+    template: "%s | YISHAK Admin",
   },
-  description: "Admin dashboard for VANTAGE fleet operations.",
+  description: "Admin dashboard for YISHAK manga operations.",
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",

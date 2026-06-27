@@ -275,7 +275,7 @@ export default function ConfigurationPage() {
       <ToastViewport toasts={toasts} onDismiss={(id) => setToasts((current) => current.filter((toast) => toast.id !== id))} />
 
       <section className="grid gap-px border border-[color:color-mix(in_srgb,var(--border)_20%,transparent)] md:grid-cols-4">
-        <StatCard label="Site" value={configuration.companyName || "VANTAGE"} />
+        <StatCard label="Site" value={configuration.companyName || "YISHAK"} />
         <StatCard label="Public Status" value={configuration.isLive ? "Live" : "Draft"} tone={configuration.isLive ? "secondary" : "error"} />
         <StatCard label="Maintenance" value={configuration.isBeingMaintained ? "On" : "Off"} tone={configuration.isBeingMaintained ? "error" : "secondary"} />
         <StatCard label="Updated" value={updatedLabel} />

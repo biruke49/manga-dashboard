@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { apiRequest } from "@/admin/lib/api";
 import { DataTable } from "@/admin/components/ui/data-table";
-import { EmptyState } from "@/admin/components/ui/empty-state";
+import { EmptyState, TableEmptyState } from "@/admin/components/ui/empty-state";
 import { StatusBadge } from "@/admin/components/ui/status-badge";
 
 interface ChapterItem {
@@ -58,7 +58,19 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
             {isLoading ? (
               <tr><td colSpan={6} className="px-6 py-8 text-center text-sm text-muted-foreground">Loading...</td></tr>
             ) : chapters.length === 0 ? (
-              <tr><td colSpan={6} className="px-6 py-8 text-center text-sm text-muted-foreground">No chapters yet.</td></tr>
+              <TableEmptyState
+                colSpan={6}
+                title="No chapters yet"
+                description="Add the first chapter for this manga, then upload pages and publish when it is ready."
+                action={
+                  <Link
+                    href={`/admin/manga/${id}/create-chapter`}
+                    className="rounded-lg bg-primary px-4 py-2 text-[11px] font-black uppercase tracking-[0.12em] text-primary-foreground transition hover:bg-primary/88"
+                  >
+                    Add Chapter
+                  </Link>
+                }
+              />
             ) : (
               chapters.map((ch) => (
                 <tr key={ch.id} className="admin-table-row">
