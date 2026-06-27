@@ -1,0 +1,19 @@
+# dependencies
+/node_modules
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+/dist
+
+# misc
+/coverage
+*.log
+*.tsbuildinfo
+.DS_Store
+.env.local
+# local tooling
+/.codex
